@@ -1,0 +1,16 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: lambda
+  elasticsearch:
+    rest:
+      uris: http://127.0.0.1:9200
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 127.0.0.1:9200
+
+initial-import:
+  enabled: false
