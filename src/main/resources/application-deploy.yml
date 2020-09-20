@@ -1,0 +1,7 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: ${ELASTICSEARCH_REST_URIS}
+
+initial-import:
+  enabled: ${INITIAL_IMPORT}
