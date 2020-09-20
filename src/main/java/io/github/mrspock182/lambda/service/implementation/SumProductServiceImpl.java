@@ -12,7 +12,7 @@ public class SumProductServiceImpl implements SumProductService {
     @Override
     public Order sum(Order order) {
         AtomicReference<Double> value = new AtomicReference<>(0.0);
-        order.products.parallelStream().forEach(o -> value.updateAndGet(v -> v + o.price));
-        return new Order(order.id, order.clientName, order.products, value.get());
+        order.products().parallelStream().forEach(o -> value.updateAndGet(v -> v + o.price()));
+        return new Order(order.id(), order.clientName(), order.products(), value.get());
     }
 }

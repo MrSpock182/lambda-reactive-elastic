@@ -6,9 +6,10 @@ import io.github.mrspock182.lambda.repository.Database;
 import io.github.mrspock182.lambda.repository.orm.Order;
 import org.springframework.data.elasticsearch.repository.config.EnableReactiveElasticsearchRepositories;
 import org.springframework.stereotype.Repository;
-import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Repository
 @EnableReactiveElasticsearchRepositories
@@ -22,15 +23,17 @@ public class OrderRepository implements Database<Order> {
 
     @Override
     public Mono<Order> save(Order order) {
-        return this.repository.save(order)
-                .doOnError(ex -> new InternalServerError(ex.getMessage()));
+        try {
+            return Mono.just(this.repository.save(order));
+        } catch (Exception ex) {
+            throw new InternalServerError(ex);
+        }
     }
 
     @Override
     public Flux<Order> findAll() {
         try {
-            return repository.findAll()
-                    .doOnError(ex -> new InternalServerError(ex.getMessage()));
+            return Flux.fromIterable(repository.findAll());
         } catch (Exception ex) {
             throw new InternalServerError(ex);
         }
@@ -39,9 +42,11 @@ public class OrderRepository implements Database<Order> {
     @Override
     public Mono<Order> findById(String id) {
         try {
-            return repository.findById(id)
-                    .switchIfEmpty(Mono.error(Exceptions.propagate(new NotFound("Don't exists order by " + id))))
-                    .doOnError(ex -> new InternalServerError(ex.getMessage()));
+            Optional<Order> order = repository.findById(id);
+            if(order.isEmpty()) {
+                throw new NotFound("Order don't exists");
+            }
+            return Mono.just(order.get());
         } catch (Exception ex) {
             throw new InternalServerError(ex);
         }

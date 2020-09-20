@@ -18,6 +18,11 @@
 	<properties>
 		<java.version>14</java.version>
 		<kotlin.version>1.4.0</kotlin.version>
+
+<!--		 SONAR EXCLUSIONS -->
+		<sonar.junit.reportPaths>
+			target/surefire-reports
+		</sonar.junit.reportPaths>
 	</properties>
 
 	<dependencies>
@@ -49,12 +54,23 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>junit</groupId>-->
+<!--			<artifactId>junit</artifactId>-->
+<!--			<version>${junit.version}</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.5.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.six2six</groupId>
+			<artifactId>fixture-factory</artifactId>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.projectreactor</groupId>
@@ -78,8 +94,24 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.jetbrains.kotlin</groupId>
@@ -106,21 +138,56 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<configuration>
+					<excludes>
+						<exclude>**/api/*.*</exclude>
+						<exclude>**/api/**/*.*</exclude>
+						<exclude>**/domain/*.*</exclude>
+						<exclude>**/domain/**/*.*</exclude>
+						<exclude>**/exception/*.*</exclude>
+						<exclude>**/exception/**/*.*</exclude>
+						<exclude>**/interception/*.*</exclude>
+						<exclude>**/interception/**/*.*</exclude>
+						<exclude>**/repository/*.*</exclude>
+						<exclude>**/repository/**/*.*</exclude>
+						<exclude>META-INF/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
+						<id>pre-unit-test</id>
 						<goals>
-							<goal>compile</goal>
+							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>testCompile</id>
-						<phase>test-compile</phase>
+						<id>post-unit-test</id>
+						<phase>test</phase>
 						<goals>
-							<goal>testCompile</goal>
+							<goal>report</goal>
+							<goal>check</goal>
 						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>COMPLEXITY</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.8</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

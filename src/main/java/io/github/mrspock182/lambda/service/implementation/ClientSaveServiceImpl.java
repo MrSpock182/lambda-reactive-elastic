@@ -1,7 +1,7 @@
 package io.github.mrspock182.lambda.service.implementation;
 
-import io.github.mrspock182.lambda.data.ClientRequest;
-import io.github.mrspock182.lambda.data.ClientResponse;
+import io.github.mrspock182.lambda.domain.ClientRequest;
+import io.github.mrspock182.lambda.domain.ClientResponse;
 import io.github.mrspock182.lambda.exception.BadRequest;
 import io.github.mrspock182.lambda.service.ClientSaveService;
 import io.github.mrspock182.lambda.service.ClientResponseService;
@@ -13,20 +13,20 @@ import reactor.core.publisher.Mono;
 public class ClientSaveServiceImpl implements ClientSaveService {
 
     private final GenerateIdService generateIdService;
-    private final ClientResponseService createFullNameService;
+    private final ClientResponseService clientResponseService;
 
-    public ClientSaveServiceImpl(GenerateIdService generateIdService, ClientResponseService createFullNameService) {
+    public ClientSaveServiceImpl(GenerateIdService generateIdService, ClientResponseService clientResponseService) {
         this.generateIdService = generateIdService;
-        this.createFullNameService = createFullNameService;
+        this.clientResponseService = clientResponseService;
     }
 
     @Override
     public Mono<ClientResponse> save(ClientRequest request) {
-        if("Kleber".equalsIgnoreCase(request.firstName)) {
+        if("Kleber".equalsIgnoreCase(request.firstName())) {
             throw new BadRequest("This name don't work");
         }
 
         return generateIdService.generate()
-                .flatMap(base -> createFullNameService.create(base, request));
+                .flatMap(base -> clientResponseService.create(base, request));
     }
 }

@@ -1,6 +1,4 @@
 package io.github.mrspock182.lambda.repository.orm
 
-class Product(name: String, price: Double) {
-    @JvmField val name = name
-    @JvmField val price = price
-}
+class Product(@get:JvmName("name") val name: String,
+              @get:JvmName("price") val price: Double)

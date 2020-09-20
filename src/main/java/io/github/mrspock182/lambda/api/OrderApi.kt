@@ -1,6 +1,6 @@
 package io.github.mrspock182.lambda.api
 
-import io.github.mrspock182.lambda.data.OrderRequest
+import io.github.mrspock182.lambda.domain.OrderRequest
 import io.github.mrspock182.lambda.repository.orm.Order
 import io.github.mrspock182.lambda.service.OrderFindAllService
 import io.github.mrspock182.lambda.service.OrderFindIdService
@@ -11,14 +11,12 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping(value = ["/mrspock182/order"])
-class OrderApi(findIdService: OrderFindIdService, saveService: OrderSaveService, findAllService: OrderFindAllService) {
-    private val findById: OrderFindIdService = findIdService
-    private val save: OrderSaveService = saveService
-    private val findAll: OrderFindAllService = findAllService
+class OrderApi(private val findById: OrderFindIdService, private val saveService: OrderSaveService,
+               private val findAllService: OrderFindAllService) {
 
     @PostMapping(value = ["/save"])
     fun save(@RequestBody request: OrderRequest): Mono<Order> {
-        return save.save(request)
+        return saveService.save(request)
     }
 
     @GetMapping(value = ["/find/{id}"])
@@ -28,7 +26,7 @@ class OrderApi(findIdService: OrderFindIdService, saveService: OrderSaveService,
 
     @GetMapping(value = ["/find-all"])
     fun findAll(): Flux<Order> {
-        return findAll.findAll()
+        return findAllService.findAll()
     }
 
 }
