@@ -1,7 +1,7 @@
 package io.github.mrspock182.lambda.service.implementation;
 
-import io.github.mrspock182.lambda.domain.ClientRequest;
-import io.github.mrspock182.lambda.domain.ClientResponse;
+import io.github.mrspock182.lambda.domain.request.ClientRequest;
+import io.github.mrspock182.lambda.domain.response.ClientResponse;
 import io.github.mrspock182.lambda.service.ClientResponseService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;

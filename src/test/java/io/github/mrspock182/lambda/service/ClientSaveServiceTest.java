@@ -1,8 +1,8 @@
 package io.github.mrspock182.lambda.service;
 
 import io.github.mrspock182.lambda.TestSetup;
-import io.github.mrspock182.lambda.domain.ClientRequest;
-import io.github.mrspock182.lambda.domain.ClientResponse;
+import io.github.mrspock182.lambda.domain.request.ClientRequest;
+import io.github.mrspock182.lambda.domain.response.ClientResponse;
 import io.github.mrspock182.lambda.exception.BadRequest;
 import io.github.mrspock182.lambda.service.implementation.ClientSaveServiceImpl;
 import org.junit.Test;

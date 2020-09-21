@@ -1,6 +1,6 @@
 package io.github.mrspock182.lambda.interception;
 
-import io.github.mrspock182.lambda.domain.ErrorResponse;
+import io.github.mrspock182.lambda.domain.response.ErrorResponse;
 import io.github.mrspock182.lambda.exception.BadRequest;
 import io.github.mrspock182.lambda.exception.InternalServerError;
 import io.github.mrspock182.lambda.exception.NotFound;

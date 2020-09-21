@@ -1,4 +1,4 @@
-package io.github.mrspock182.lambda.domain
+package io.github.mrspock182.lambda.domain.response
 
 import java.util.*
 

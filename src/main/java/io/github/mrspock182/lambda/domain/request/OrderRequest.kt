@@ -1,4 +1,4 @@
-package io.github.mrspock182.lambda.domain
+package io.github.mrspock182.lambda.domain.request
 
 import io.github.mrspock182.lambda.repository.orm.Product
 
