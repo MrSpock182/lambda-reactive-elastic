@@ -10,11 +10,11 @@ import reactor.core.publisher.Mono;
 public class ClientResponseServiceImpl implements ClientResponseService {
     @Override
     public Mono<ClientResponse> create(ClientResponse response, ClientRequest request) {
-        return Mono.just(new ClientResponse(response.id(), createFullName(request)));
+        return Mono.just(new ClientResponse(response.getId(), createFullName(request)));
     }
 
     private String createFullName(ClientRequest request) {
-        return request.firstName() + " " + request.lastName();
+        return request.getFirstName() + " " + request.getLastName();
     }
 
 }

@@ -37,7 +37,7 @@ public class ClientResponseServiceTest extends TestSetup {
     @Test
     public void createTest() {
         Mono<ClientResponse> response = service.create(getClientResponse(), getClientRequest());
-        assertEquals("Mario Mario", Objects.requireNonNull(response.block()).fullName());
+        assertEquals("Mario Mario", Objects.requireNonNull(response.block()).getFullName());
     }
 
 }

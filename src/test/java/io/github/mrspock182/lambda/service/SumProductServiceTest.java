@@ -32,12 +32,10 @@ public class SumProductServiceTest extends TestSetup {
         return new Order("xpto", "Ronaldo", list, 0);
     }
 
-
-
     @Test
     public void sumTest() {
         Order order = this.service.sum(getOrder());
-        assertEquals(35.8, order.totalPrice(), 0);
+        assertEquals(35.8, order.getTotalPrice(), 0);
     }
 
 }

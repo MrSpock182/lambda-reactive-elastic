@@ -1,4 +1,4 @@
 package io.github.mrspock182.lambda.domain
 
-data class ClientRequest(@get:JvmName("firstName") val firstName: String,
-                         @get:JvmName("lastName") val lastName: String)
+data class ClientRequest(@get:JvmName("getFirstName") val firstName: String,
+                         @get:JvmName("getLastName") val lastName: String)

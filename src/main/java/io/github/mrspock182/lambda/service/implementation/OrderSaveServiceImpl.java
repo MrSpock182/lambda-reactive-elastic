@@ -24,6 +24,6 @@ public class OrderSaveServiceImpl implements OrderSaveService {
     @Override
     public Mono<Order> save(OrderRequest order) {
         return database.save(sumProductService.sum(new Order(UUID.randomUUID().toString(),
-                order.clientName(), order.products(), 0)));
+                order.getClientName(), order.getProducts(), 0)));
     }
 }

@@ -52,7 +52,7 @@ public class ClientSaveServiceTest extends TestSetup {
                 .thenReturn(Mono.just(getClientResponse()));
 
         Mono<ClientResponse> response = service.save(getClientRequest());
-        assertEquals(getClientResponse().fullName(), Objects.requireNonNull(response.block()).fullName());
+        assertEquals(getClientResponse().getFullName(), Objects.requireNonNull(response.block()).getFullName());
 
         verify(generateIdService).generate();
         verify(clientResponseService).create(any(ClientResponse.class), any(ClientRequest.class));

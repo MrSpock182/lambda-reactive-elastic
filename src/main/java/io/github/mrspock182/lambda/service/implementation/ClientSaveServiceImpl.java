@@ -22,7 +22,7 @@ public class ClientSaveServiceImpl implements ClientSaveService {
 
     @Override
     public Mono<ClientResponse> save(ClientRequest request) {
-        if("Kleber".equalsIgnoreCase(request.firstName())) {
+        if("Kleber".equalsIgnoreCase(request.getFirstName())) {
             throw new BadRequest("This name don't work");
         }
 
