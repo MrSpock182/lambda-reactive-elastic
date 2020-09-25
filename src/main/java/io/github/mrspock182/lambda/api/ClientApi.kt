@@ -1,7 +1,7 @@
 package io.github.mrspock182.lambda.api
 
-import io.github.mrspock182.lambda.domain.ClientRequest
-import io.github.mrspock182.lambda.domain.ClientResponse
+import io.github.mrspock182.lambda.domain.request.ClientRequest
+import io.github.mrspock182.lambda.domain.response.ClientResponse
 import io.github.mrspock182.lambda.service.ClientSaveService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

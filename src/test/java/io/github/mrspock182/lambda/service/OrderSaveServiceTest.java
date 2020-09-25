@@ -1,7 +1,7 @@
 package io.github.mrspock182.lambda.service;
 
 import io.github.mrspock182.lambda.TestSetup;
-import io.github.mrspock182.lambda.domain.OrderRequest;
+import io.github.mrspock182.lambda.domain.request.OrderRequest;
 import io.github.mrspock182.lambda.repository.Database;
 import io.github.mrspock182.lambda.repository.orm.Order;
 import io.github.mrspock182.lambda.repository.orm.Product;

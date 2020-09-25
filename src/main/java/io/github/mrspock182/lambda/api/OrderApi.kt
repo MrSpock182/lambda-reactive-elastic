@@ -1,6 +1,6 @@
 package io.github.mrspock182.lambda.api
 
-import io.github.mrspock182.lambda.domain.OrderRequest
+import io.github.mrspock182.lambda.domain.request.OrderRequest
 import io.github.mrspock182.lambda.repository.orm.Order
 import io.github.mrspock182.lambda.service.OrderFindAllService
 import io.github.mrspock182.lambda.service.OrderFindIdService
@@ -11,7 +11,8 @@ import reactor.core.publisher.Mono
 
 @RestController
 @RequestMapping(value = ["/mrspock182/order"])
-class OrderApi(private val findById: OrderFindIdService, private val saveService: OrderSaveService,
+class OrderApi(private val findById: OrderFindIdService,
+               private val saveService: OrderSaveService,
                private val findAllService: OrderFindAllService) {
 
     @PostMapping(value = ["/save"])

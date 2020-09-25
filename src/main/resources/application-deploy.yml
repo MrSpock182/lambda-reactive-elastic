@@ -2,6 +2,11 @@ spring:
   elasticsearch:
     rest:
       uris: ${ELASTICSEARCH_REST_URIS}
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: ${ELASTICSEARCH_REACTIVE_ENDPOINTS}
 
 initial-import:
   enabled: ${INITIAL_IMPORT}

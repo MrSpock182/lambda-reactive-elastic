@@ -1,8 +1,8 @@
 package io.github.mrspock182.lambda.service;
 
 import io.github.mrspock182.lambda.TestSetup;
-import io.github.mrspock182.lambda.domain.ClientRequest;
-import io.github.mrspock182.lambda.domain.ClientResponse;
+import io.github.mrspock182.lambda.domain.request.ClientRequest;
+import io.github.mrspock182.lambda.domain.response.ClientResponse;
 import io.github.mrspock182.lambda.exception.BadRequest;
 import io.github.mrspock182.lambda.service.implementation.ClientSaveServiceImpl;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class ClientSaveServiceTest extends TestSetup {
                 .thenReturn(Mono.just(getClientResponse()));
 
         Mono<ClientResponse> response = service.save(getClientRequest());
-        assertEquals(getClientResponse().fullName(), Objects.requireNonNull(response.block()).fullName());
+        assertEquals(getClientResponse().getFullName(), Objects.requireNonNull(response.block()).getFullName());
 
         verify(generateIdService).generate();
         verify(clientResponseService).create(any(ClientResponse.class), any(ClientRequest.class));
