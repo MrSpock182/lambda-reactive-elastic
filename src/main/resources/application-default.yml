@@ -1,0 +1,12 @@
+spring:
+  elasticsearch:
+    rest:
+      uris: http://172.17.0.5:9200
+  data:
+    elasticsearch:
+      client:
+        reactive:
+          endpoints: 172.17.0.5:9200
+
+initial-import:
+  enabled: false

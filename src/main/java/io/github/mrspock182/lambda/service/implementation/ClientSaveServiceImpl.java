@@ -1,7 +1,7 @@
 package io.github.mrspock182.lambda.service.implementation;
 
-import io.github.mrspock182.lambda.domain.ClientRequest;
-import io.github.mrspock182.lambda.domain.ClientResponse;
+import io.github.mrspock182.lambda.domain.request.ClientRequest;
+import io.github.mrspock182.lambda.domain.response.ClientResponse;
 import io.github.mrspock182.lambda.exception.BadRequest;
 import io.github.mrspock182.lambda.service.ClientSaveService;
 import io.github.mrspock182.lambda.service.ClientResponseService;
@@ -22,7 +22,7 @@ public class ClientSaveServiceImpl implements ClientSaveService {
 
     @Override
     public Mono<ClientResponse> save(ClientRequest request) {
-        if("Kleber".equalsIgnoreCase(request.firstName())) {
+        if("Kleber".equalsIgnoreCase(request.getFirstName())) {
             throw new BadRequest("This name don't work");
         }
 
